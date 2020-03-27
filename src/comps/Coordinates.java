@@ -3,6 +3,7 @@ package comps;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.jetbrains.annotations.NotNull;
 
 @JsonAutoDetect
 public class Coordinates {
@@ -17,11 +18,15 @@ public class Coordinates {
         this.y = y;
     }
 
+    public boolean greaterThan(Coordinates coords){
+        return x > coords.x && y > coords.y;
+    }
+
     public Integer getX(){
         return x;
     }
 
-    public void setX(Integer x){
+    public void setX(@NotNull Integer x){
         this.x = x;
     }
 
@@ -29,7 +34,7 @@ public class Coordinates {
         return y;
     }
 
-    public void setY(Integer y){
+    public void setY(@NotNull Integer y){
         this.y = y;
     }
 

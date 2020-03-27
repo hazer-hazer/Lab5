@@ -3,6 +3,8 @@ package comps;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import java.util.Arrays;
+
 @JsonAutoDetect
 @JsonRootName("mood")
 public enum Mood {
@@ -18,7 +20,21 @@ public enum Mood {
         this.num = num;
     }
 
-    public String getMood(){
+    public static String[] getNames(){
+        Mood moods[] = values();
+        String[] names = new String[moods.length];
+        for(int i = 0; i < names.length; i++){
+            names[i] = moods[i].name();
+        }
+        return names;
+    }
+
+    public static boolean has(String name){
+        String[] names = getNames();
+        return Arrays.asList(names).contains(name);
+    }
+
+    public String getValue(){
         return mood;
     }
 

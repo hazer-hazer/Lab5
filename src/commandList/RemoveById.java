@@ -1,6 +1,10 @@
 package commandList;
 
+import comps.HumanBeing;
+import utils.Logger;
 import utils.UserInterface;
+
+import java.util.function.Predicate;
 
 public class RemoveById extends Command {
     public RemoveById(){
@@ -8,7 +12,12 @@ public class RemoveById extends Command {
     }
 
     public void execute(UserInterface ui, String[] args){
+        if(args.length == 0){
+            Logger.printl("Please, specify HumanBeing id");
+            return;
+        }
         int id = Integer.parseInt(args[0]);
-        ui.getCollection().removeById(id);
+        Predicate <HumanBeing> condition = hb -> hb.getId().equals(id);
+        ui.getCollection().removeIf(condition);
     }
 }

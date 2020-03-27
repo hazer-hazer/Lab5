@@ -1,38 +1,51 @@
 package utils;
 
+import commandList.CommandsManager;
+import comps.Car;
+import comps.Coordinates;
+import comps.HumanBeing;
+import comps.Mood;
+
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class IO {
-    Scanner scanner;
+    private Scanner scanner;
     private UserInterface ui;
+    private CommandsManager commandsManager = new CommandsManager();
 
     public IO(String inputPath, String outputPath) {
-        ui = new UserInterface(inputPath, outputPath);
-        scanner = new Scanner(System.in);
+        ui = new UserInterface(new InputStreamReader(System.in, StandardCharsets.UTF_8),
+                               new OutputStreamWriter(System.out, StandardCharsets.UTF_8),
+                                inputPath, outputPath, false);
+
+        /* FOR DEBUG */
+        /* FAST WAY TO PUSH ELEMENT */
+//        HumanBeing h = new HumanBeing(
+//                117,
+//                "Agvin",
+//                new Coordinates(5, 10),
+//                LocalDateTime.now(),
+//                true,
+//                false,
+//                10.0f,
+//                "Again.wav",
+//                69.42f,
+//                Mood.SADNESS,
+//                new Car("MY CAR, BITCH")
+//        );
+//        ui.getCollection().add(h);
     }
 
     public void listen(){
-        readCommand();
-        listen();
-    }
-
-    public void readCommand(){
         Logger.print("> ");
+        String line = ui.read();
+        ui.executeCommand(line);
 
-        String[] argv = scanner.nextLine().split(" ");
-
-        String command = argv[0].toLowerCase();
-        argv = Arrays.copyOfRange(argv, 1, argv.length);
-
-        if (command.length() == 0)
-            return;
-
-        executeCommand(command, argv);
-
-    }
-
-    public void executeCommand(String commandName, String[] args){
-        ui.executeCommand(commandName, args);
+        listen();
     }
 }

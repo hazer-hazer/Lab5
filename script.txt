@@ -1,2 +1,13 @@
 show
 help
+add
+SCRIPT_NAME
+318
+200
+true
+true
+69.420
+Deoxygenated One
+5
+SORROW
+I don't like cars

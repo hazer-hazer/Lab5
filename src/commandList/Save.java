@@ -1,5 +1,6 @@
 package commandList;
 
+import utils.Logger;
 import utils.UserInterface;
 
 import java.io.IOException;
@@ -14,6 +15,8 @@ public class Save extends Command {
             ui.saveCollection();
         }catch(IOException e){
             e.printStackTrace();
+        }finally {
+            Logger.printl("Collection saved successfully");
         }
     }
 }

@@ -21,20 +21,6 @@ public class Main {
 ////                System.out.println(h.toString());
 //
 //            Collection col = new Collection();
-//            HumanBeing h = new HumanBeing(
-//                    1,
-//                    "Human",
-//                    new Coordinates(5, 10),
-//                    LocalDateTime.now(),
-//                    true,
-//                    false,
-//                    10.0f,
-//                    "Again.wav",
-//                    69.42f,
-//                    Mood.SADNESS,
-//                    new Car("MY CAR, BITCH")
-//            );
-//            col.add(h);
 //
 //            jsonWriter.writeCollection(col, outputPath);
 //        } catch (IOException e) {

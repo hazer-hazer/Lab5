@@ -2,14 +2,18 @@ package comps;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import java.time.LocalDateTime;
 
 @JsonAutoDetect
 public class HumanBeing {
+
+    private static int lastId = 0;
+
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
-    @JsonDeserialize(as = Coordinates.class)
     private Coordinates coordinates; //Поле не может быть null
     private java.time.LocalDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private boolean realHero;
@@ -18,17 +22,36 @@ public class HumanBeing {
     private String soundtrackName; //Поле не может быть null
     private float minutesOfWaiting;
     private Mood mood; //Поле может быть null
-    @JsonDeserialize(as = Car.class)
     private Car car; //Поле не может быть null
 
-    public HumanBeing(){}
+    public HumanBeing(String name,
+                      Coordinates coordinates,
+                      boolean realHero,
+                      boolean hasToothpick,
+                      float impactSpeed,
+                      String soundtrackName,
+                      float minutesOfWaiting,
+                      Mood mood,
+                      Car car){
+        id = ++lastId;
+        this.name = name;
+        this.coordinates = coordinates;
+        this.creationDate = LocalDateTime.now();
+        this.realHero = realHero;
+        this.hasToothpick = hasToothpick;
+        this.impactSpeed = impactSpeed;
+        this.soundtrackName = soundtrackName;
+        this.minutesOfWaiting = minutesOfWaiting;
+        this.mood = mood;
+        this.car = car;
+    }
 
     @JsonCreator
     public HumanBeing(
             @JsonProperty("id") Integer id,
             @JsonProperty("name") String name,
             @JsonProperty("coordinates") Coordinates coordinates,
-            @JsonProperty("creationDate") java.time.LocalDateTime creationDate,
+            @JsonProperty("creationDate") LocalDateTime creationDate,
             @JsonProperty("realHero") boolean realHero,
             @JsonProperty("hasToothpick") boolean hasToothpick,
             @JsonProperty("impactSpeed") float impactSpeed,
@@ -37,6 +60,9 @@ public class HumanBeing {
             @JsonProperty("mood") Mood mood,
             @JsonProperty("car") Car car
     ){
+        if(HumanBeing.lastId < id){
+            HumanBeing.lastId = id;
+        }
         this.id = id;
         this.name = name;
         this.coordinates = coordinates;
@@ -71,11 +97,16 @@ public class HumanBeing {
         this.coordinates = coordinates;
     }
 
-    public java.time.LocalDateTime getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
-    public void setCreationDate(java.time.LocalDateTime creationDate) {
-        this.creationDate = creationDate;
+
+    public void setCreationDate(String creationDate) {
+        if (creationDate != null) {
+            this.creationDate = LocalDateTime.parse(creationDate);
+        } else {
+            this.creationDate = LocalDateTime.now();
+        }
     }
 
     public boolean getRealHero(){
@@ -125,6 +156,10 @@ public class HumanBeing {
     }
     public void setCar(Car car){
         this.car = car;
+    }
+
+    public boolean greaterThan(HumanBeing humanBeing){
+        return humanBeing.getCoordinates().greaterThan(coordinates);
     }
 
     @Override

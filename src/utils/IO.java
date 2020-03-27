@@ -18,6 +18,11 @@ public class IO {
     private UserInterface ui;
     private CommandsManager commandsManager = new CommandsManager();
 
+    /**
+     * Constructor
+     * @param inputPath path to json input file
+     * @param outputPath path to json output file
+     * */
     public IO(String inputPath, String outputPath) {
         ui = new UserInterface(new InputStreamReader(System.in, StandardCharsets.UTF_8),
                                new OutputStreamWriter(System.out, StandardCharsets.UTF_8),
@@ -41,11 +46,13 @@ public class IO {
 //        ui.getCollection().add(h);
     }
 
+    /**
+     * Listen to commands
+     * */
     public void listen(){
         Logger.print("> ");
         String line = ui.read();
         ui.executeCommand(line);
-
         listen();
     }
 }

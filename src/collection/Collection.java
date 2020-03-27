@@ -16,7 +16,6 @@ public class Collection {
 
     public Collection(HumanBeingDTO[] arr_col){
         creationDate = new Date();
-//        col = new ArrayList<>(Arrays.asList(arr_col));
         col = new ArrayList<>();
         for(HumanBeingDTO dto : arr_col){
             dto.validateFields();
@@ -24,42 +23,91 @@ public class Collection {
         }
     }
 
+    /**
+     * set
+     * set collection by List-interface
+     * */
+    public void set(List col){
+        col = new ArrayList<HumanBeing>(col);
+    }
+
+    /**
+     * asArray
+     * @return Collection as Object array
+     * */
     public Object[] asArray(){
         return col.toArray();
     }
+
+    /**
+     * asDTOArray
+     * @return DTO Object Array
+     * */
     public Object[] asDTOArray(){
         ArrayList <HumanBeingDTO> dtos = new ArrayList<>();
         col.forEach(hb -> dtos.add(new HumanBeingDTO(hb)));
         return dtos.toArray();
     }
+
+    /**
+     * asList
+     * @return ArrayList of HumanBeing
+     * */
     public ArrayList <HumanBeing> asList() {
         return col;
     }
 
+    /**
+     * clear collection
+     * */
     public void clear(){
         col.clear();
     }
 
+    /**
+     * add
+     * push back HumanBeing
+     * */
     public void add(HumanBeing h){
         col.add(h);
     }
 
+    /**
+     * removeIf
+     * removes HumanBeings by condition
+     * */
     public void removeIf(Predicate <HumanBeing> condition){
         col.removeIf(condition);
     }
 
+    /**
+     * getSize
+     * @return size of collection
+     * */
     public int getSize(){
         return col.size();
     }
 
+    /**
+     * getType
+     * @return String collection type
+     * */
     public String getType(){
         return col.getClass().getSimpleName();
     }
 
+    /**
+     * getCreationDate
+     * @return Date creationDate
+     * */
     public Date getCreationDate(){
         return creationDate;
     }
 
+    /**
+     * hasId
+     * Check if collection has HumanBeing with id
+     * */
     public boolean hasId(Integer id){
         for(HumanBeing h : col){
             if(h.getId().equals(id)){

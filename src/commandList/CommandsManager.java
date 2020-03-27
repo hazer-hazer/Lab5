@@ -29,6 +29,7 @@ public class CommandsManager {
         commandList.add(new InsertAt());
         commandList.add(new RemoveGreater());
         commandList.add(new Update());
+        commandList.add(new Reorder());
 
 
 //        !!!!

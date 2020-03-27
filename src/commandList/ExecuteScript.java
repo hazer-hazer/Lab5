@@ -24,8 +24,8 @@ public class ExecuteScript extends Command {
 
             Logger.printl("run script by path", path);
 
-            UserInterface scriptUi = new UserInterface(new FileReader(path.toFile(), StandardCharsets.UTF_8),
-                                                       new OutputStreamWriter(System.out, StandardCharsets.UTF_8),
+            UserInterface scriptUi = new UserInterface(new FileReader(path.toFile()),
+                                                       new OutputStreamWriter(System.out),
                                                        ui.getInputPath(), ui.getOutputPath(), true);
 
             while(scriptUi.hasNextLine()){

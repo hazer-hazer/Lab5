@@ -19,11 +19,19 @@ import java.util.ArrayList;
 public class JsonReader {
     private ObjectMapper objectMapper = new ObjectMapper();
 
+    /**
+     * JsonReader constructor
+     * Configures objectMapper
+     * */
     public JsonReader(){
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.findAndRegisterModules();
     }
 
+    /**
+     * readCollection
+     * @param path String path to file
+     * */
     public Collection readCollection(String path) throws IOException {
         try{
             FileReader fr = new FileReader(path);

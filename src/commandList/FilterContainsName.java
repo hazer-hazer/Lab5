@@ -14,8 +14,9 @@ public class FilterContainsName extends Command {
         Collection col = ui.getCollection();
         String substr = args[0];
         for (HumanBeing hb : col.asList()){
-            if(hb.getName().contains(substr))
+            if(hb.getName().contains(substr)) {
                 Logger.printl(hb);
+            }
         }
     }
 }

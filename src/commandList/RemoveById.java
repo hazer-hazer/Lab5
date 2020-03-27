@@ -17,7 +17,6 @@ public class RemoveById extends Command {
             return;
         }
         int id = Integer.parseInt(args[0]);
-        Predicate <HumanBeing> condition = hb -> hb.getId().equals(id);
-        ui.getCollection().removeIf(condition);
+        ui.getCollection().removeIf(hb -> hb.getId().equals(id));
     }
 }

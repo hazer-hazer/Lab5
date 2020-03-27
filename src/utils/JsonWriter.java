@@ -14,15 +14,23 @@ import java.text.SimpleDateFormat;
 public class JsonWriter {
     private ObjectMapper objectMapper = new ObjectMapper();
 
+    /**
+     * JsonWriter constructor
+     * Configures objectMapper
+     * */
     public JsonWriter(){
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.findAndRegisterModules();
     }
 
+    /**
+     * writeCollection
+     * @param path String path to output file
+     * @param col Collection to write to file
+     * */
     public void writeCollection(String path, Collection col) throws IOException {
         File file = new File(path);
         FileOutputStream outputStream = new FileOutputStream(file);
-//        objectMapper.writeValue(file, col.asArray());
         outputStream.write(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(col.asDTOArray()).getBytes());
         outputStream.close();
     }

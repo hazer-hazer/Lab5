@@ -47,5 +47,6 @@
     <orderEntry type="library" name="com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.10.3" level="project" />
     <orderEntry type="library" name="com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.10.3" level="project" />
     <orderEntry type="library" name="com.fasterxml.jackson.module:jackson-module-parameter-names:2.10.3" level="project" />
+    <orderEntry type="library" name="com.fasterxml.jackson.module:jackson-module-afterburner:2.10.3" level="project" />
   </component>
 </module>

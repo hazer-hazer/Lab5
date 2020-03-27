@@ -14,7 +14,6 @@ public class RemoveAnyByImpactSpeed extends Command {
             Logger.printl("Please, specify impact speed");
             return;
         }
-        boolean removed = false;
         float impactSpeed = Float.parseFloat(args[0]);
         for(HumanBeing h : ui.getCollection().asList()){
             if(h.getImpactSpeed() == impactSpeed){

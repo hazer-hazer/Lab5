@@ -13,6 +13,7 @@ public class Add extends Command {
         super("add", "добавить новый элемент в коллекцию");
     }
 
+
     public void execute(UserInterface ui, String[] args){
         HumanBeing humanBeing = ui.readHumanBeing();
         ui.getCollection().add(humanBeing);

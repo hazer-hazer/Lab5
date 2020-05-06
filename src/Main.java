@@ -9,8 +9,9 @@ public class Main {
             if(args.length != 2){
                 throw new Exception("please, specify input and output paths");
             }
-            Logger.randPrivet();
             IO io = new IO(args[0], args[1]);
+
+            Logger.randPrivet();
             io.listen();
         }catch (Exception e){
             e.printStackTrace();

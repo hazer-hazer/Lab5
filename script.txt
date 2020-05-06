@@ -1,14 +1,14 @@
+info
 show
-help
+
 add
-SCRIPT_NAME
-318
-200
-true
+HUMAN_NAME_FROM_SCRIPT
+100
+500
+false
 true
 69.420
 Deoxygenated One
-5
-SORROW
-I don't like cars
-show
+666.666
+SADNESS
+SCRIPT_CAR

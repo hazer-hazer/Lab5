@@ -7,12 +7,14 @@ import comps.Coordinates;
 import comps.HumanBeing;
 import comps.Mood;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.function.Predicate;
 
@@ -47,6 +49,15 @@ public class UserInterface {
         this.writer = writer;
         this.script = script;
         scanner = new Scanner(reader);
+
+        if(!inputPath.substring(inputPath.lastIndexOf('.')).equals(".json")) {
+            Logger.error("Input file must be type of .json");
+            System.exit(-1);
+        }
+        if(!outputPath.substring(outputPath.lastIndexOf('.')).equals(".json")) {
+            Logger.error("Output file must be type of .json");
+            System.exit(-1);
+        }
 
         this.inputPath = Paths.get(inputPath).toAbsolutePath().toString();
         this.outputPath = Paths.get(outputPath).toAbsolutePath().toString();
@@ -119,8 +130,16 @@ public class UserInterface {
      * read
      * @return reader next line
      * */
-    public String read(){
-        return scanner.nextLine();
+    public String read() {
+        String line;
+        try{
+            line = scanner.nextLine();
+        }catch(Exception e){
+            Logger.illmissu();
+            System.exit(-1);
+            return "";
+        }
+        return line;
     }
 
     /**
@@ -141,7 +160,7 @@ public class UserInterface {
                 Logger.printl(msg);
             }
             str = read();
-        }while(!condition.test(str));
+        }while(!condition.test(str) || str.trim().length() == 0);
 
         return str;
     }
@@ -155,8 +174,13 @@ public class UserInterface {
     }
 
     private Double readNumberWithMessage(String msg, int min, int max){
-        String string = readWithMessage(msg, str -> numberInRange(Double.parseDouble(str), min, max) );
-
+        String string;
+        try{
+            string = readWithMessage(msg, str -> numberInRange(Double.parseDouble(str), min, max));
+        }catch(Exception e){
+            Logger.error("Please, type a number");
+            return readNumberWithMessage(msg, min, max);
+        }
         return Double.parseDouble(string);
     }
 

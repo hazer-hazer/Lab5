@@ -46,7 +46,7 @@ public class CommandsManager {
                 throw new CommandNotFoundException("Command `" + name + "` not found");
             return commands.get(name);
         }catch(CommandNotFoundException e){
-            System.out.println(e.getMessage());
+            Logger.error(e.getMessage());
             return null;
         }
     }

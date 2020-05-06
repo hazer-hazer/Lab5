@@ -11,10 +11,16 @@ public class CountGreaterThanMood extends Command {
 
     public void execute(UserInterface ui, String[] args){
         if(args.length == 0){
-            Logger.printl("Please, specify mood");
+            Logger.error("Please, specify mood");
             return;
         }
-        Mood mood = Mood.valueOf(args[0]);
+        Mood mood;
+        try{
+            mood = Mood.valueOf(args[0]);
+        }catch(Exception e){
+            Logger.error("Please, type right Mood name");
+            return;
+        }
         long count = ui.getCollection().asList().stream().filter(h -> h.getMood().ordinal() > mood.ordinal()).count();
         Logger.printl(count, "HumanBeings with mood more than", mood);
     }

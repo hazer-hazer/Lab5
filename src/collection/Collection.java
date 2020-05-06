@@ -2,7 +2,6 @@ package collection;
 
 import comps.HumanBeing;
 import comps.HumanBeingDTO;
-import utils.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;

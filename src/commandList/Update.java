@@ -11,19 +11,21 @@ public class Update extends Command {
 
     public void execute(UserInterface ui, String[] args){
         if(args.length < 1){
-            Logger.printl("Please, specify HumanBeing ID");
+            Logger.error("Please, specify HumanBeing ID");
             return;
         }
         Integer id;
         try {
             id = Integer.parseInt(args[0]);
-        }catch(ClassCastException e){
-            Logger.printl(e.getMessage());
+        }catch(Exception e){
+            Logger.error("Please, type a valid id");
+            return;
+        }
+        if(!ui.getCollection().hasId(id)){
+            Logger.error("HumanBeing with id", id, "does not exists");
             return;
         }
         HumanBeing humanBeing = ui.readHumanBeing();
-        if(!ui.getCollection().update(id, humanBeing)){
-            Logger.printl("HumanBeing with id", id, "does not exists");
-        }
+        ui.getCollection().update(id, humanBeing);
     }
 }

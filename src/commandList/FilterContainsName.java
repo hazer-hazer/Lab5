@@ -13,6 +13,10 @@ public class FilterContainsName extends Command {
     public void execute(UserInterface ui, String[] args){
         Collection col = ui.getCollection();
         String substr = args[0];
+        if(substr.trim().length() == 0){
+            Logger.error("Please, type not an empty value");
+            return;
+        }
         for (HumanBeing hb : col.asList()){
             if(hb.getName().contains(substr)) {
                 Logger.printl(hb);

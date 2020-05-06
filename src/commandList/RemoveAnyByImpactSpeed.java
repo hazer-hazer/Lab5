@@ -11,10 +11,16 @@ public class RemoveAnyByImpactSpeed extends Command {
 
     public void execute(UserInterface ui, String[] args){
         if(args.length == 0){
-            Logger.printl("Please, specify impact speed");
+            Logger.error("Please, specify impact speed");
             return;
         }
-        float impactSpeed = Float.parseFloat(args[0]);
+        float impactSpeed;
+        try{
+            impactSpeed = Float.parseFloat(args[0]);
+        }catch(Exception e){
+            Logger.error("Please, type a valid number");
+            return;
+        }
         for(HumanBeing h : ui.getCollection().asList()){
             if(h.getImpactSpeed() == impactSpeed){
                 ui.getCollection().removeById(h.getId());

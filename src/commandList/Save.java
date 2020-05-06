@@ -4,6 +4,7 @@ import utils.Logger;
 import utils.UserInterface;
 
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 
 public class Save extends Command {
     public Save(){
@@ -13,10 +14,11 @@ public class Save extends Command {
     public void execute(UserInterface ui, String[] args) {
         try{
             ui.saveCollection();
+            Logger.printl("Collection saved successfully");
+        }catch(AccessDeniedException e){
+            Logger.printl("No permissions to save output file");
         }catch(IOException e){
             e.printStackTrace();
-        }finally {
-            Logger.printl("Collection saved successfully");
         }
     }
 }

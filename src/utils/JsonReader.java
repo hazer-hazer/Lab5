@@ -12,6 +12,7 @@ import comps.HumanBeingDTO;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,6 +39,9 @@ public class JsonReader {
             HumanBeingDTO[] col = objectMapper.readValue(fr, HumanBeingDTO[].class);
             fr.close();
             return new Collection(col);
+        }catch(AccessDeniedException e){
+            Logger.error("Cannot read from input file. Access denied");
+            return null;
         }catch (ClassCastException e) {
             System.out.println(e.getMessage());
             return null;

@@ -13,10 +13,16 @@ public class RemoveById extends Command {
 
     public void execute(UserInterface ui, String[] args){
         if(args.length == 0){
-            Logger.printl("Please, specify HumanBeing id");
+            Logger.error("Please, specify HumanBeing id");
             return;
         }
-        int id = Integer.parseInt(args[0]);
+        int id;
+        try{
+            id = Integer.parseInt(args[0]);
+        }catch(Exception e){
+            Logger.error("Please, specify a valid id");
+            return;
+        }
         ui.getCollection().removeIf(hb -> hb.getId().equals(id));
     }
 }

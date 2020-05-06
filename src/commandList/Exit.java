@@ -10,6 +10,6 @@ public class Exit extends Command {
 
     public void execute(UserInterface ui, String[] args){
         Logger.illmissu();
-        System.exit(0);
+        System.exit(-1);
     }
 }

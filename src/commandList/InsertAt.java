@@ -11,12 +11,18 @@ public class InsertAt extends Command {
 
     public void execute(UserInterface ui, String[] args){
         if(args.length == 0){
-            Logger.printl("Please, specify index");
+            Logger.error("Please, specify index");
             return;
         }
-        int index = Integer.parseInt(args[0]);
+        int index;
+        try{
+            index = Integer.parseInt(args[0]);
+        }catch(Exception e){
+            Logger.error("Please, type a number");
+            return;
+        }
         if(index > ui.getCollection().getSize() || index < 0){
-            Logger.printl("Index is out of collection bounds");
+            Logger.error("Index is out of collection bounds");
             return;
         }
         HumanBeing humanBeing = ui.readHumanBeing();
